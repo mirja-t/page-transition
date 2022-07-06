@@ -14,6 +14,11 @@
       content="./images/design/screenshot.jpg"
     />
     <script defer src="js/app.js"></script>
+    <script defer>
+        iframe.contentDocument.addEventListener('scroll', function(event) {
+        console.log(event);
+    });
+    </script>
     <link href="css/app.css" rel="stylesheet">
   </head>
   <body class="fullpage section-0">

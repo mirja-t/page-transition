@@ -10,12 +10,13 @@
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
                 if(window.parent.document.body.classList.contains('fullpage')) {
+                    console.log('add class "iframe"')
                     document.body.classList.add('iframe');
                 }
             });
         </script>
       </head>
-    <body id="project-details" class="iframe">
+    <body id="project-details">
         <header>
             <div id="logowrapper">
                 <a href="#" title="Back to home page">

@@ -40,6 +40,7 @@
  *
  */
 /* Main After */
+/* Section After */
 /* Nav Mask */
 /* CSS Reset */
 html,
@@ -2053,10 +2054,12 @@ hr {
  *
  */
 /* Main After */
+/* Section After */
 /* Nav Mask */
 /* Components */
 .cards > * .card-links {
   --bg-translation: translate(2%, 2%);
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2245,6 +2248,7 @@ hr {
 
 .close {
   --bg-translation: translate(2%, 2%);
+  position: relative;
   position: fixed;
   z-index: 10;
   top: 1em;
@@ -2342,12 +2346,6 @@ main {
   overflow: hidden;
 }
 main:before, main:after {
-  border-bottom-color: #E6007E;
-}
-main.odd:before, main.odd:after {
-  border-bottom-color: white;
-}
-main:before, main:after {
   content: "";
   position: absolute;
   display: table;
@@ -2360,14 +2358,18 @@ main:before, main:after {
 main:before {
   width: 0;
   height: 0;
-  bottom: -4vw;
   border-left: 100vw solid transparent;
-  border-bottom-width: 4vw;
 }
 main:after {
   width: 100%;
-  bottom: -2vw;
-  border-bottom-width: 2vw;
+}
+main:before {
+  bottom: 0;
+  border-bottom-width: 0;
+}
+main:after {
+  bottom: 0vw;
+  border-bottom-width: 0;
 }
 
 section.section {
@@ -2387,14 +2389,6 @@ section.section:nth-child(2n) {
 section.section:nth-child(2n):before, section.section:nth-child(2n):after {
   border-bottom-color: white;
 }
-section.section > .container:before {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(20%, #E6007E), to(rgba(255, 255, 255, 0)));
-  background: linear-gradient(180deg, #E6007E 20%, rgba(255, 255, 255, 0) 100%);
-}
-section.section:nth-child(2n) > .container:before {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(20%, white), to(rgba(255, 255, 255, 0)));
-  background: linear-gradient(180deg, white 20%, rgba(255, 255, 255, 0) 100%);
-}
 @media (max-width: 991px) {
   section.section {
     height: auto !important;
@@ -2413,17 +2407,18 @@ section.section:before, section.section:after {
 section.section:before, section.section:after {
   height: 0;
   border-bottom-style: solid;
+  width: 100%;
 }
 section.section:before {
-  top: -19.9vw;
-  width: 0;
   border-left: 100vw solid transparent;
-  border-bottom-width: 18vw;
+}
+section.section:before {
+  top: -9.9vw;
+  border-bottom-width: 8vw;
 }
 section.section:after {
   top: -2vw;
-  width: 100%;
-  border-bottom-width: 2vw;
+  border-bottom-width: 2.1vw;
 }
 
 section.section.active .section-bg:before {
@@ -2452,29 +2447,20 @@ section.section.active + section.section:before {
   border-bottom-width: 8vw;
 }
 section.section.active + section.section:after {
-  border-bottom-width: 2vw;
+  top: -2vw;
+  border-bottom-width: 2.1vw;
 }
 
-main:not(#fullpage):before, main:not(#fullpage):after {
-  border-bottom-color: #E6007E;
-}
-main:not(#fullpage).odd:before, main:not(#fullpage).odd:after {
-  border-bottom-color: white;
-}
-main:not(#fullpage):before, main:not(#fullpage):after {
-  -webkit-transition: border-width 0.625s ease 0.25s, bottom 0.625s ease 0.25s;
-  transition: border-width 0.625s ease 0.25s, bottom 0.625s ease 0.25s;
-}
 main:not(#fullpage):before {
-  bottom: 1.9vw;
+  bottom: 1.9em;
   border-bottom-width: 8vw;
 }
 main:not(#fullpage):after {
   bottom: 0vw;
+  border-bottom-width: 2em;
 }
-main:not(#fullpage) section.section:before {
-  top: -9.9vw;
-  border-bottom-width: 8vw;
+main:not(#fullpage).odd:before, main:not(#fullpage).odd:after {
+  border-bottom-color: white;
 }
 
 section.section aside,
@@ -2557,18 +2543,14 @@ section.section .header-image .content {
 section.section > .container {
   z-index: 3;
   height: 100%;
-  -webkit-transition: -webkit-transform 0.625s ease 0.33s;
-  transition: -webkit-transform 0.625s ease 0.33s;
-  transition: transform 0.625s ease 0.33s;
-  transition: transform 0.625s ease 0.33s, -webkit-transform 0.625s ease 0.33s;
+  padding: calc(5em + 1vw) calc( 0.75em + 0.5vw );
 }
 @media (min-width: 992px) {
   section.section > .container {
+    padding: 0 calc( 0.75em + 0.5vw );
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-transform: translateY(-15vh);
-            transform: translateY(-15vh);
   }
 }
 section.section > .container:before {
@@ -2579,23 +2561,13 @@ section.section > .container:before {
   top: 0;
   width: 100%;
   height: 100%;
+  position: fixed;
   z-index: 3;
   height: 6em !important;
   top: 0;
 }
-section.section.active > .container {
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
-}
-section.section.active ~ section.section > .container {
-  -webkit-transform: translateY(15vh);
-          transform: translateY(15vh);
-}
-@media (max-width: 991px) {
-  section.section.active ~ section.section > .container {
-    -webkit-transform: translateY(0) !important;
-            transform: translateY(0) !important;
-  }
+section.section:first-child > .container {
+  min-height: 100vh;
 }
 
 #project-details {
@@ -3346,6 +3318,7 @@ header {
 
 #logowrapper {
   --bg-translation: translate(2%, 2%);
+  position: relative;
   width: 12vw;
   height: 12vw;
   max-height: 13em;
@@ -3446,93 +3419,16 @@ header {
   background: #ffed00;
 }
 
-body:not(.down):not(.up) #logowrapper svg {
+#logowrapper svg {
   -webkit-clip-path: polygon(0% 120%, 100% 100%, 100% 100%, 0% 100%);
           clip-path: polygon(0% 120%, 100% 100%, 100% 100%, 0% 100%);
 }
-body:not(.down):not(.up) #logowrapper > *:after {
+#logowrapper > *:after {
   background-position: 0% 0%;
-}
-
-.section-0.down #logowrapper svg {
-  -webkit-animation: mask-up-in 0.5s ease forwards 0.5s;
-          animation: mask-up-in 0.5s ease forwards 0.5s;
-}
-.section-0.up #logowrapper svg {
-  -webkit-animation: mask-down-in 0.5s ease forwards 0.15s;
-          animation: mask-down-in 0.5s ease forwards 0.15s;
-}
-
-.section-1.down #logowrapper svg {
-  -webkit-clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
-          clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
-  -webkit-animation: mask-up-out 0.5s ease forwards 0.5s;
-          animation: mask-up-out 0.5s ease forwards 0.5s;
-}
-.section-1.up #logowrapper svg {
-  -webkit-clip-path: inset(0% 0 100% 0);
-          clip-path: inset(0% 0 100% 0);
-  -webkit-animation: mask-down-out 0.5s ease forwards 0.15s;
-          animation: mask-down-out 0.5s ease forwards 0.15s;
-}
-
-.section-2.down #logowrapper svg {
-  -webkit-animation: mask-up-in 0.5s ease forwards 0.5s;
-          animation: mask-up-in 0.5s ease forwards 0.5s;
-}
-.section-2.up #logowrapper svg {
-  -webkit-animation: mask-down-in 0.5s ease forwards 0.15s;
-          animation: mask-down-in 0.5s ease forwards 0.15s;
-}
-
-.section-3.down #logowrapper svg {
-  -webkit-clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
-          clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
-  -webkit-animation: mask-up-out 0.5s ease forwards 0.5s;
-          animation: mask-up-out 0.5s ease forwards 0.5s;
-}
-.section-3.up #logowrapper svg {
-  -webkit-clip-path: inset(0% 0 100% 0);
-          clip-path: inset(0% 0 100% 0);
-  -webkit-animation: mask-down-out 0.5s ease forwards 0.15s;
-          animation: mask-down-out 0.5s ease forwards 0.15s;
-}
-
-.section-4.down #logowrapper svg {
-  -webkit-animation: mask-up-in 0.5s ease forwards 0.5s;
-          animation: mask-up-in 0.5s ease forwards 0.5s;
-}
-.section-4.up #logowrapper svg {
-  -webkit-animation: mask-down-in 0.5s ease forwards 0.15s;
-          animation: mask-down-in 0.5s ease forwards 0.15s;
-}
-
-.section-5.down #logowrapper svg {
-  -webkit-clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
-          clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
-  -webkit-animation: mask-up-out 0.5s ease forwards 0.5s;
-          animation: mask-up-out 0.5s ease forwards 0.5s;
-}
-.section-5.up #logowrapper svg {
-  -webkit-clip-path: inset(0% 0 100% 0);
-          clip-path: inset(0% 0 100% 0);
-  -webkit-animation: mask-down-out 0.5s ease forwards 0.15s;
-          animation: mask-down-out 0.5s ease forwards 0.15s;
-}
-
-.section-6.down #logowrapper svg {
-  -webkit-animation: mask-up-in 0.5s ease forwards 0.5s;
-          animation: mask-up-in 0.5s ease forwards 0.5s;
-}
-.section-6.up #logowrapper svg {
-  -webkit-animation: mask-down-in 0.5s ease forwards 0.15s;
-          animation: mask-down-in 0.5s ease forwards 0.15s;
 }
 
 footer {
   position: relative;
-  height: 3em;
-  margin-top: -3em;
   right: 0;
   bottom: 0;
   width: 100%;
@@ -3544,6 +3440,8 @@ footer {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  height: max(2em, 4vw);
+  margin-top: min(-2em, -4vw);
 }
 footer nav {
   display: -webkit-box;
@@ -3555,6 +3453,7 @@ footer nav li:not(.icon) a:hover {
 }
 footer nav li.icon {
   --bg-translation: translate(2%, 2%);
+  position: relative;
   margin-top: -1.5em;
   width: 2.5em;
   height: 2.5em;
@@ -3637,11 +3536,6 @@ footer svg {
 footer svg path,
 footer svg polygon {
   fill: white;
-}
-
-.section-0:not(.down):not(.up) footer svg {
-  -webkit-clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
-          clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
 }
 
 .section-0.down footer svg {
@@ -4895,37 +4789,46 @@ section.section h1, section.section h2 {
   overflow-y: hidden;
   height: 100vh;
 }
-.fullpage main#fullpage:before, .fullpage main#fullpage:after {
-  border-bottom-color: white;
-}
-.fullpage main#fullpage.odd:before, .fullpage main#fullpage.odd:after {
-  border-bottom-color: #E6007E;
+
+#fullpage:before, #fullpage:after {
+  position: fixed;
 }
 
-.last-section #fullpage:before, .last-section #fullpage:after {
-  -webkit-transition: border-width 0.625s ease 0.25s, bottom 0.625s ease 0.25s;
-  transition: border-width 0.625s ease 0.25s, bottom 0.625s ease 0.25s;
-}
 .last-section #fullpage:before {
-  bottom: 1.9vw;
+  bottom: 1.9em;
   border-bottom-width: 8vw;
 }
 .last-section #fullpage:after {
   bottom: 0vw;
+  border-bottom-width: 2em;
 }
-.last-section.section-2 #fullpage:before, .last-section.section-2 #fullpage:after {
+
+.section-1 #fullpage:before, .section-1 #fullpage:after {
+  border-bottom-color: white;
+}
+
+.section-2 #fullpage:before, .section-2 #fullpage:after {
   border-bottom-color: #E6007E;
 }
-.last-section.section-4 #fullpage:before, .last-section.section-4 #fullpage:after {
+
+.section-3 #fullpage:before, .section-3 #fullpage:after {
+  border-bottom-color: white;
+}
+
+.section-4 #fullpage:before, .section-4 #fullpage:after {
   border-bottom-color: #E6007E;
 }
-.last-section.section-6 #fullpage:before, .last-section.section-6 #fullpage:after {
+
+.section-5 #fullpage:before, .section-5 #fullpage:after {
+  border-bottom-color: white;
+}
+
+.section-6 #fullpage:before, .section-6 #fullpage:after {
   border-bottom-color: #E6007E;
 }
 
 #fullpage section.section {
   background-color: white;
-  min-height: 100vh;
 }
 #fullpage section.section:before, #fullpage section.section:after {
   border-bottom-color: white;
@@ -4936,13 +4839,13 @@ section.section h1, section.section h2 {
 #fullpage section.section:nth-child(2n):before, #fullpage section.section:nth-child(2n):after {
   border-bottom-color: #E6007E;
 }
-#fullpage section.section > .container:before {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(20%, white), to(rgba(255, 255, 255, 0)));
-  background: linear-gradient(180deg, white 20%, rgba(255, 255, 255, 0) 100%);
-}
 #fullpage section.section:nth-child(2n) > .container:before {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(20%, #E6007E), to(rgba(255, 255, 255, 0)));
-  background: linear-gradient(180deg, #E6007E 20%, rgba(255, 255, 255, 0) 100%);
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(230, 0, 126, 0)), color-stop(70%, #E6007E));
+  background: linear-gradient(0deg, rgba(230, 0, 126, 0) 0%, #E6007E 70%);
+}
+#fullpage section.section > .container:before {
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(255, 255, 255, 0)), color-stop(70%, white));
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, white 70%);
 }
 #fullpage section.section h1, #fullpage section.section h2 {
   text-shadow: 0px 0px 4px white;
@@ -4955,6 +4858,46 @@ section.section h1, section.section h2 {
 }
 #fullpage section.section:nth-child(2n) h3, #fullpage section.section:nth-child(2n) h4, #fullpage section.section:nth-child(2n) h5, #fullpage section.section:nth-child(2n) h6, #fullpage section.section:nth-child(2n) li, #fullpage section.section:nth-child(2n) p, #fullpage section.section:nth-child(2n) a, #fullpage section.section:nth-child(2n) label {
   color: white;
+}
+
+.fullpage section.section:before {
+  top: -19.9vw;
+  border-bottom-width: 18vw;
+}
+.fullpage section.section:after {
+  top: -2vw;
+  border-bottom-width: 2vw;
+}
+
+#fullpage section.section > .container {
+  padding: 0 calc( 0.75em + 0.5vw );
+}
+
+.fullpage section.section > .container {
+  -webkit-transition: -webkit-transform 0.625s ease 0.33s;
+  transition: -webkit-transform 0.625s ease 0.33s;
+  transition: transform 0.625s ease 0.33s;
+  transition: transform 0.625s ease 0.33s, -webkit-transform 0.625s ease 0.33s;
+}
+@media (min-width: 992px) {
+  .fullpage section.section > .container {
+    -webkit-transform: translateY(-15vh);
+            transform: translateY(-15vh);
+  }
+}
+.fullpage section.section.active > .container {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+.fullpage section.section.active ~ section.section > .container {
+  -webkit-transform: translateY(15vh);
+          transform: translateY(15vh);
+}
+@media (max-width: 991px) {
+  .fullpage section.section.active ~ section.section > .container {
+    -webkit-transform: translateY(0) !important;
+            transform: translateY(0) !important;
+  }
 }
 
 main + footer nav#bottom-nav ul li a {
@@ -4980,9 +4923,6 @@ main.odd + footer nav#bottom-nav ul li a {
   padding: 5vw 0 5vw 0;
 }
 
-body:not(.fullpage) #fullpage:before, body:not(.fullpage) #fullpage:after {
-  border-bottom-color: #E6007E;
-}
 body:not(.fullpage) #fullpage:before {
   bottom: max(1.9vw, 1.9em);
   border-bottom-width: max(8vw, 3em);
@@ -4994,11 +4934,6 @@ body:not(.fullpage) #fullpage:after {
 
 #fullpage + footer {
   position: fixed;
-}
-
-.section-0:not(.down):not(.up) footer svg {
-  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
-          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
 }
 
 .section-0.down footer svg {
@@ -5129,4 +5064,134 @@ body:not(.fullpage) #fullpage:after {
           clip-path: polygon(0% 0%, 100% -10%, 100% -10%, 0% 0%);
   -webkit-animation: mask-down-out 0.5s ease forwards 0.15s;
           animation: mask-down-out 0.5s ease forwards 0.15s;
+}
+
+.section-0.down #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-up-in 0.5s ease forwards 0.5s;
+          animation: mask-up-in 0.5s ease forwards 0.5s;
+}
+.section-0.up #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-down-in 0.5s ease forwards 0.15s;
+          animation: mask-down-in 0.5s ease forwards 0.15s;
+}
+
+.section-1.down #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-up-in 0.5s ease forwards 0.5s;
+          animation: mask-up-in 0.5s ease forwards 0.5s;
+}
+.section-1.up #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-down-in 0.5s ease forwards 0.15s;
+          animation: mask-down-in 0.5s ease forwards 0.15s;
+}
+
+.section-1.down #logowrapper svg {
+  -webkit-clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
+  -webkit-animation: mask-up-out 0.5s ease forwards 0.5s;
+          animation: mask-up-out 0.5s ease forwards 0.5s;
+}
+.section-1.up #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% -10%, 0% 0%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% -10%, 0% 0%);
+  -webkit-animation: mask-down-out 0.5s ease forwards 0.15s;
+          animation: mask-down-out 0.5s ease forwards 0.15s;
+}
+
+.section-2.down #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-up-in 0.5s ease forwards 0.5s;
+          animation: mask-up-in 0.5s ease forwards 0.5s;
+}
+.section-2.up #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-down-in 0.5s ease forwards 0.15s;
+          animation: mask-down-in 0.5s ease forwards 0.15s;
+}
+
+.section-3.down #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-up-in 0.5s ease forwards 0.5s;
+          animation: mask-up-in 0.5s ease forwards 0.5s;
+}
+.section-3.up #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-down-in 0.5s ease forwards 0.15s;
+          animation: mask-down-in 0.5s ease forwards 0.15s;
+}
+
+.section-3.down #logowrapper svg {
+  -webkit-clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
+  -webkit-animation: mask-up-out 0.5s ease forwards 0.5s;
+          animation: mask-up-out 0.5s ease forwards 0.5s;
+}
+.section-3.up #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% -10%, 0% 0%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% -10%, 0% 0%);
+  -webkit-animation: mask-down-out 0.5s ease forwards 0.15s;
+          animation: mask-down-out 0.5s ease forwards 0.15s;
+}
+
+.section-4.down #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-up-in 0.5s ease forwards 0.5s;
+          animation: mask-up-in 0.5s ease forwards 0.5s;
+}
+.section-4.up #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-down-in 0.5s ease forwards 0.15s;
+          animation: mask-down-in 0.5s ease forwards 0.15s;
+}
+
+.section-5.down #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-up-in 0.5s ease forwards 0.5s;
+          animation: mask-up-in 0.5s ease forwards 0.5s;
+}
+.section-5.up #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-down-in 0.5s ease forwards 0.15s;
+          animation: mask-down-in 0.5s ease forwards 0.15s;
+}
+
+.section-5.down #logowrapper svg {
+  -webkit-clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 110%, 100% 100%, 100% 100%, 0% 100%);
+  -webkit-animation: mask-up-out 0.5s ease forwards 0.5s;
+          animation: mask-up-out 0.5s ease forwards 0.5s;
+}
+.section-5.up #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% -10%, 0% 0%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% -10%, 0% 0%);
+  -webkit-animation: mask-down-out 0.5s ease forwards 0.15s;
+          animation: mask-down-out 0.5s ease forwards 0.15s;
+}
+
+.section-6.down #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-up-in 0.5s ease forwards 0.5s;
+          animation: mask-up-in 0.5s ease forwards 0.5s;
+}
+.section-6.up #logowrapper svg {
+  -webkit-clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+          clip-path: polygon(0% 0%, 100% -10%, 100% 100%, 0% 110%);
+  -webkit-animation: mask-down-in 0.5s ease forwards 0.15s;
+          animation: mask-down-in 0.5s ease forwards 0.15s;
 }
